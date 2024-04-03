@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://5pekpbs0nxeo"]
+
+[ext_resource type="Script" path="res://Scripts/Metronome.gd" id="1_k877l"]
+[ext_resource type="AudioStream" uid="uid://blsg8x2bxw7dd" path="res://Audio/metronome.wav" id="2_m3tdw"]
+
+[node name="Metronome" type="Node2D"]
+script = ExtResource("1_k877l")
+
+[node name="Metronome_Sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_m3tdw")
+
+[node name="Metronome_Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="Metronome_Timer" to="." method="_on_metronome_timer_timeout"]
