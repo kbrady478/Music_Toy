@@ -8,6 +8,7 @@ script = ExtResource("1_k877l")
 
 [node name="Metronome_Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_m3tdw")
+bus = &"Metronome"
 
 [node name="Metronome_Accented" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_m3tdw")

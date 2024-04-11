@@ -38,6 +38,38 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Sound Options" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.484
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.568054
+offset_top = 1.0
+offset_right = 3.0
+offset_bottom = 1.0
+grow_horizontal = 2
+
+[node name="BoxContainer" type="BoxContainer" parent="Sound Options"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.054
+anchor_right = 1.0
+anchor_bottom = 0.998
+offset_left = 0.292
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 0.295959
+
+[node name="TabBar" type="TabBar" parent="Sound Options/BoxContainer"]
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="Sound Options/BoxContainer/TabBar"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 163.0
+offset_right = 625.0
+offset_bottom = 233.0
+
 [connection signal="pressed" from="Metronome Container/Metronome Toggle" to="Metronome Container" method="_on_texture_button_pressed"]
 
 [editable path="Metronome Container/Metronome"]

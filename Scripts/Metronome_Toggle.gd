@@ -9,5 +9,5 @@ func _ready():
 
 func _on_texture_button_pressed():
 	print_debug("metronome toggled")
-	AudioServer.set_bus_mute(AudioServer.Metronome, not bus_Toggle)
+	#AudioServer.set_bus_mute(AudioServer.Metronome, not bus_Toggle)
 
