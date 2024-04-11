@@ -1,7 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://demq6gi8eu4qd"]
-
-[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_leh3m"]
-resource_name = "PitchShift"
+[gd_resource type="AudioBusLayout" format=3 uid="uid://b0idy56wohplk"]
 
 [resource]
 bus/1/name = &"Metronome"
@@ -10,5 +7,3 @@ bus/1/mute = false
 bus/1/bypass_fx = false
 bus/1/volume_db = 0.0
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectPitchShift_leh3m")
-bus/1/effect/0/enabled = true

@@ -33,7 +33,7 @@ func metronome():
 		if current_Wait_Time != new_Wait_Time:
 			bpm_Calculation()
 		
-		print_debug(current_Wait_Time)
+		#print_debug(current_Wait_Time)
 		
 		if accent_Tracker == 0:
 			metronome_Accented.play()

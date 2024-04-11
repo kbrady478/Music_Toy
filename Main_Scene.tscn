@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcl0d3cr6tdy1"]
+
+[ext_resource type="Script" path="res://Scripts/Metronome_Toggle.gd" id="1_s6dcx"]
+[ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/metronome.tscn" id="2_t2n8u"]
+[ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_7ycsy"]
+[ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_hk4kt"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Metronome Container" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_s6dcx")
+
+[node name="Metronome" parent="Metronome Container" instance=ExtResource("2_t2n8u")]
+
+[node name="Metronome Toggle" type="TextureButton" parent="Metronome Container"]
+layout_mode = 0
+offset_left = 156.4
+offset_right = 668.4
+offset_bottom = 512.0
+scale = Vector2(0.075, 0.075)
+toggle_mode = true
+action_mode = 0
+texture_normal = ExtResource("3_7ycsy")
+texture_pressed = ExtResource("4_hk4kt")
+
+[node name="TextureRect" type="TextureRect" parent="Metronome Container"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="pressed" from="Metronome Container/Metronome Toggle" to="Metronome Container" method="_on_texture_button_pressed"]
+
+[editable path="Metronome Container/Metronome"]
