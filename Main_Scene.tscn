@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bcl0d3cr6tdy1"]
+[gd_scene load_steps=6 format=3 uid="uid://crhyao1wu6pgp"]
 
 [ext_resource type="Script" path="res://Scripts/Metronome_Toggle.gd" id="1_s6dcx"]
 [ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/metronome.tscn" id="2_t2n8u"]
 [ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_7ycsy"]
+[ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Bus_Audio_Slider.tscn" id="3_ilf2x"]
 [ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_hk4kt"]
 
 [node name="Main" type="Control"]
@@ -22,6 +23,11 @@ script = ExtResource("1_s6dcx")
 
 [node name="Metronome" parent="Metronome Container" instance=ExtResource("2_t2n8u")]
 
+[node name="Volume Slider" parent="Metronome Container/Metronome" instance=ExtResource("3_ilf2x")]
+offset_right = 92.0
+value = 0.5
+bus_Name = "Metronome"
+
 [node name="Metronome Toggle" type="TextureButton" parent="Metronome Container"]
 layout_mode = 0
 offset_left = 156.4
@@ -37,38 +43,6 @@ texture_pressed = ExtResource("4_hk4kt")
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="Sound Options" type="Control" parent="."]
-layout_mode = 1
-anchor_left = 0.484
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -0.568054
-offset_top = 1.0
-offset_right = 3.0
-offset_bottom = 1.0
-grow_horizontal = 2
-
-[node name="BoxContainer" type="BoxContainer" parent="Sound Options"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.054
-anchor_right = 1.0
-anchor_bottom = 0.998
-offset_left = 0.292
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = 0.295959
-
-[node name="TabBar" type="TabBar" parent="Sound Options/BoxContainer"]
-layout_mode = 2
-
-[node name="TabContainer" type="TabContainer" parent="Sound Options/BoxContainer/TabBar"]
-layout_mode = 0
-offset_left = -4.0
-offset_top = 163.0
-offset_right = 625.0
-offset_bottom = 233.0
 
 [connection signal="pressed" from="Metronome Container/Metronome Toggle" to="Metronome Container" method="_on_texture_button_pressed"]
 

@@ -1,4 +1,5 @@
 # **Credits for this project**
+Links to code based tutorials can be found within their respective scripts 
 
 ## Inspiration
 
