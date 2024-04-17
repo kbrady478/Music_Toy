@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://5pekpbs0nxeo"]
 
-[ext_resource type="Script" path="res://Scripts/Metronome.gd" id="1_k877l"]
-[ext_resource type="AudioStream" uid="uid://blsg8x2bxw7dd" path="res://Audio/metronome.wav" id="2_m3tdw"]
+[ext_resource type="Script" path="res://Scripts/Metronome.gd" id="1_n7oi1"]
+[ext_resource type="AudioStream" uid="uid://blsg8x2bxw7dd" path="res://Audio/metronome.wav" id="2_jpo30"]
 
 [node name="Metronome" type="Node2D"]
-script = ExtResource("1_k877l")
+script = ExtResource("1_n7oi1")
 
 [node name="Metronome_Sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_m3tdw")
+stream = ExtResource("2_jpo30")
 bus = &"Metronome"
 
 [node name="Metronome_Accented" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_m3tdw")
+stream = ExtResource("2_jpo30")
 pitch_scale = 1.5
 bus = &"Metronome"
 

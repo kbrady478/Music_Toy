@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://crhyao1wu6pgp"]
+[gd_scene load_steps=10 format=3 uid="uid://crhyao1wu6pgp"]
 
 [ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_s7m86"]
-[ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/metronome.tscn" id="2_t2n8u"]
 [ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_7ycsy"]
-[ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Bus_Audio_Slider.tscn" id="3_ilf2x"]
+[ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Tid Bits/Bus_Audio_Slider.tscn" id="3_ilf2x"]
 [ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_hk4kt"]
+[ext_resource type="PackedScene" uid="uid://fyo102umoyhj" path="res://Prefabs/Key Components/Metronome_Controller.tscn" id="5_syk2d"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvkrs"]
 bg_color = Color(0.113725, 0.133333, 0.160784, 1)
@@ -17,6 +17,40 @@ font_size = 17
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 0
+
+[sub_resource type="GDScript" id="GDScript_wqgm4"]
+script/source = "extends Control
+
+@export var bus_Name: String
+
+var bus_Index: int
+var volume_Level : float # for use across functions
+var mute_Toggle: bool
+
+
+func _ready() -> void:
+	bus_Index = AudioServer.get_bus_index(bus_Name)
+	mute_Toggle = false
+	
+
+
+func _on_volume_slider_value_changed(value) -> void:
+	volume_Level = value
+	
+	if mute_Toggle == true:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
+	else:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
+
+
+func _on_mute_button_pressed():
+	mute_Toggle = not mute_Toggle
+	
+	if mute_Toggle == true:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
+	else:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
+"
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -89,9 +123,15 @@ offset_bottom = 40.0
 text = "Master Volume:"
 label_settings = SubResource("LabelSettings_yq7lh")
 
-[node name="Metronome" parent="Background" instance=ExtResource("2_t2n8u")]
+[node name="Metronome_Controller" parent="Background" instance=ExtResource("5_syk2d")]
+layout_mode = 1
+offset_left = -1.0
+offset_right = -422.0
+offset_bottom = -167.0
+script = SubResource("GDScript_wqgm4")
 
 [connection signal="value_changed" from="Background/Master Bus Volume/Panel/Volume Slider" to="Background/Master Bus Volume" method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="Background/Master Bus Volume/Panel/Mute Button" to="Background/Master Bus Volume" method="_on_mute_button_pressed"]
 
-[editable path="Background/Metronome"]
+[editable path="Background/Metronome_Controller"]
+[editable path="Background/Metronome_Controller/Metronome"]

@@ -14,3 +14,7 @@ config/name="Music Toy"
 run/main_scene="res://Main_Scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://Other/icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://Other/default_bus_layout.tres"
