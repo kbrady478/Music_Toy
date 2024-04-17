@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqo701k5hpdlt"]
 
-[ext_resource type="Script" path="res://Prefabs/Bus_Audio_Slider.gd" id="1_axki2"]
+[ext_resource type="Script" path="res://Scripts/Bus_Audio_Slider.gd" id="1_axki2"]
 
 [node name="Volume Slider" type="HSlider"]
 offset_right = 8.0
