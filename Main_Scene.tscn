@@ -1,10 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://crhyao1wu6pgp"]
+[gd_scene load_steps=9 format=3 uid="uid://crhyao1wu6pgp"]
 
-[ext_resource type="Script" path="res://Scripts/Metronome_Toggle.gd" id="1_s6dcx"]
+[ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_s7m86"]
 [ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/metronome.tscn" id="2_t2n8u"]
 [ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_7ycsy"]
 [ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Bus_Audio_Slider.tscn" id="3_ilf2x"]
 [ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_hk4kt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvkrs"]
+bg_color = Color(0.113725, 0.133333, 0.160784, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tux1g"]
+bg_color = Color(0.211765, 0.239216, 0.290196, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yq7lh"]
+font_size = 17
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 0
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -14,36 +26,72 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Metronome Container" type="Control" parent="."]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(2.5, 2.5)
-script = ExtResource("1_s6dcx")
-
-[node name="Metronome" parent="Metronome Container" instance=ExtResource("2_t2n8u")]
-
-[node name="Volume Slider" parent="Metronome Container/Metronome" instance=ExtResource("3_ilf2x")]
-offset_right = 92.0
-value = 0.5
-bus_Name = "Metronome"
-
-[node name="Metronome Toggle" type="TextureButton" parent="Metronome Container"]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 0
-offset_left = 156.4
-offset_right = 668.4
-offset_bottom = 512.0
-scale = Vector2(0.075, 0.075)
+offset_right = 1152.0
+offset_bottom = 648.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_cvkrs")
+
+[node name="Master Bus Volume" type="Control" parent="Background"]
+layout_mode = 1
+anchor_left = 1.011
+anchor_right = 1.011
+offset_left = -449.672
+offset_right = -449.672
+offset_bottom = 1.0
+grow_horizontal = 0
+script = ExtResource("1_s7m86")
+bus_Name = "Master"
+
+[node name="Panel" type="Panel" parent="Background/Master Bus Volume"]
+layout_mode = 0
+offset_top = 16.0
+offset_right = 394.0
+offset_bottom = 75.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tux1g")
+
+[node name="Volume Slider" parent="Background/Master Bus Volume/Panel" instance=ExtResource("3_ilf2x")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 150.0
+offset_top = -7.5
+offset_right = 309.0
+offset_bottom = 8.5
+grow_vertical = 2
+value = 0.5
+
+[node name="Mute Button" type="TextureButton" parent="Background/Master Bus Volume/Panel"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -25.5
+offset_right = 444.0
+offset_bottom = 486.5
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
 toggle_mode = true
-action_mode = 0
 texture_normal = ExtResource("3_7ycsy")
 texture_pressed = ExtResource("4_hk4kt")
 
-[node name="TextureRect" type="TextureRect" parent="Metronome Container"]
+[node name="Label" type="Label" parent="Background/Master Bus Volume/Panel"]
 layout_mode = 0
-offset_right = 40.0
+offset_left = 8.0
+offset_top = 16.0
+offset_right = 138.0
 offset_bottom = 40.0
+text = "Master Volume:"
+label_settings = SubResource("LabelSettings_yq7lh")
 
-[connection signal="pressed" from="Metronome Container/Metronome Toggle" to="Metronome Container" method="_on_texture_button_pressed"]
+[node name="Metronome" parent="Background" instance=ExtResource("2_t2n8u")]
 
-[editable path="Metronome Container/Metronome"]
+[connection signal="value_changed" from="Background/Master Bus Volume/Panel/Volume Slider" to="Background/Master Bus Volume" method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Background/Master Bus Volume/Panel/Mute Button" to="Background/Master Bus Volume" method="_on_mute_button_pressed"]
+
+[editable path="Background/Metronome"]

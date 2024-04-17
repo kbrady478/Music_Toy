@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://fyo102umoyhj"]
 
+[ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_h3bwa"]
 [ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/metronome.tscn" id="1_heyky"]
-[ext_resource type="Script" path="res://Scripts/Metronome_Volume.gd" id="1_opbj4"]
 [ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Bus_Audio_Slider.tscn" id="2_rxtph"]
 [ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_0vwki"]
 [ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_k7s04"]
@@ -13,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_opbj4")
+script = ExtResource("1_h3bwa")
 bus_Name = "Metronome"
 
 [node name="Metronome" parent="." instance=ExtResource("1_heyky")]
@@ -27,7 +27,6 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 239.0
 value = 0.5
-script = null
 
 [node name="Mute Button" type="TextureButton" parent="UI Elements"]
 layout_mode = 0
