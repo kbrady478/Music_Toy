@@ -32,7 +32,16 @@ action_mode = 0
 texture_normal = ExtResource("3_0vwki")
 texture_pressed = ExtResource("4_k7s04")
 
+[node name="BPM Entry" type="LineEdit" parent="UI Elements"]
+layout_mode = 0
+offset_right = 67.0625
+offset_bottom = 31.0
+max_length = 3
+caret_blink = true
+
 [connection signal="value_changed" from="UI Elements/Volume Slider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="UI Elements/Mute Button" to="." method="_on_mute_button_pressed"]
+[connection signal="text_changed" from="UI Elements/BPM Entry" to="Metronome" method="_on_bpm_entry_text_changed"]
+[connection signal="text_submitted" from="UI Elements/BPM Entry" to="Metronome" method="_on_line_edit_text_submitted"]
 
 [editable path="Metronome"]
