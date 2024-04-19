@@ -9,6 +9,7 @@ var pause_Toggle: bool
 
 @onready var effect_Timer = $"Audio Controller/Timer"
 @onready var sound_Effect = $"Audio Controller/Sound_Effect"
+@onready var bpm_Edit = $"UI Elements/Panel/BPM Edit"
 
 
 func _ready():
@@ -19,10 +20,12 @@ func _ready():
 	pause_Toggle = false
 	effect_Player()
 
+
 func bpm_Calculation():
 	# Ensure both are floats, otherwise it will round to int
 	new_Wait_Time = (60.0 / bpm)
 	current_Wait_Time = new_Wait_Time
+	effect_Timer.set_wait_time(current_Wait_Time)
 	pass
 
 
@@ -53,7 +56,6 @@ func _on_volume_slider_value_changed(value):
 		sound_Effect.set_volume_db(linear_to_db(volume_Level))
 
 
-
 func _on_mute_toggle_pressed():
 	mute_Toggle = !mute_Toggle
 	
@@ -72,3 +74,9 @@ func _on_pause_toggle_pressed():
 		effect_Player()
 		effect_Timer.set_wait_time(current_Wait_Time)
 		effect_Timer.paused = false
+
+
+func _on_bpm_edit_text_submitted(new_text):
+	bpm = float(new_text)
+	bpm_Edit.set_placeholder(str(bpm))
+	bpm_Calculation()

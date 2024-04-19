@@ -64,7 +64,15 @@ toggle_mode = true
 texture_normal = ExtResource("3_yq2td")
 texture_pressed = ExtResource("4_rkmc3")
 
+[node name="BPM Edit" type="LineEdit" parent="UI Elements/Panel"]
+layout_mode = 0
+offset_right = 67.0625
+offset_bottom = 31.0
+max_length = 3
+caret_blink = true
+
 [connection signal="timeout" from="Audio Controller/Timer" to="." method="_on_timer_timeout"]
 [connection signal="value_changed" from="UI Elements/Panel/Volume_Slider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="UI Elements/Panel/Mute_Toggle" to="." method="_on_mute_toggle_pressed"]
 [connection signal="pressed" from="UI Elements/Panel/Pause_Toggle" to="." method="_on_pause_toggle_pressed"]
+[connection signal="text_submitted" from="UI Elements/Panel/BPM Edit" to="." method="_on_bpm_edit_text_submitted"]
