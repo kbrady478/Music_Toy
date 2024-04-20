@@ -1,9 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://u5od8msmyrxg"]
+[gd_scene load_steps=9 format=3 uid="uid://u5od8msmyrxg"]
 
 [ext_resource type="Script" path="res://Scripts/Sound_Effect.gd" id="1_j70qf"]
 [ext_resource type="AudioStream" uid="uid://6lekbu0mj4rh" path="res://Audio/hihat_1.wav" id="2_pdytr"]
-[ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_yq2td"]
-[ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_rkmc3"]
+[ext_resource type="StyleBox" uid="uid://dpxmf7lno6wkj" path="res://Styles/small_Panel.tres" id="3_50k4h"]
+[ext_resource type="Texture2D" uid="uid://car2uyshjsxja" path="res://Images/play.png" id="4_vigg7"]
+[ext_resource type="Texture2D" uid="uid://cptw6f3s8pgcn" path="res://Images/pause.png" id="5_43rxg"]
+[ext_resource type="Texture2D" uid="uid://dxec5f7v6ula6" path="res://Images/speaker_On.png" id="6_7nsdy"]
+[ext_resource type="Texture2D" uid="uid://b1ah5tfl1uv41" path="res://Images/speaker_Muted.png" id="7_m8i6c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l5mov"]
+bg_color = Color(0.145098, 0.168627, 0.203922, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="(Sound Effect) Controller" type="Control"]
 layout_mode = 3
@@ -29,50 +39,210 @@ offset_bottom = 40.0
 
 [node name="Panel" type="Panel" parent="UI Elements"]
 layout_mode = 0
-offset_right = 315.0
-offset_bottom = 49.0
+offset_right = 510.0
+offset_bottom = 128.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_l5mov")
 
-[node name="Volume_Slider" type="HSlider" parent="UI Elements/Panel"]
+[node name="Audio Name" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 8.0
+offset_right = 221.0
+offset_bottom = 42.0
+theme_override_styles/panel = ExtResource("3_50k4h")
+
+[node name="Audio Name Label" type="Label" parent="UI Elements/Panel/Audio Name"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 126.0
-offset_top = -7.5
-offset_right = 250.0
-offset_bottom = 8.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
 grow_vertical = 2
+text = "Temp Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BPM" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_top = -75.0
+offset_right = 102.0
+offset_bottom = -12.0
+grow_vertical = 0
+theme_override_styles/panel = ExtResource("3_50k4h")
+
+[node name="Label" type="Label" parent="UI Elements/Panel/BPM"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "BPM:"
+
+[node name="BPM Edit" type="LineEdit" parent="UI Elements/Panel/BPM"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -37.5
+offset_top = -40.0
+offset_right = 38.5
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(60, 11)
+max_length = 3
+caret_blink = true
+
+[node name="Test Audio" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = -70.0
+offset_right = 171.0
+offset_bottom = -14.0
+grow_vertical = 0
+pivot_offset = Vector2(31, 42)
+theme_override_styles/panel = ExtResource("3_50k4h")
+
+[node name="Button" type="Button" parent="UI Elements/Panel/Test Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = ExtResource("3_50k4h")
+text = "Sample"
+
+[node name="Pause_Play" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 181.0
+offset_top = -71.0
+offset_right = 240.0
+offset_bottom = -14.0
+grow_vertical = 0
+pivot_offset = Vector2(-38, 42)
+theme_override_styles/panel = ExtResource("3_50k4h")
+
+[node name="Pause_Toggle" type="TextureButton" parent="UI Elements/Panel/Pause_Play"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -22.5
+offset_top = -22.5
+offset_right = 489.5
+offset_bottom = 489.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.09, 0.09)
+toggle_mode = true
+texture_normal = ExtResource("4_vigg7")
+texture_pressed = ExtResource("5_43rxg")
+
+[node name="Volume" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -257.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = 59.0
+grow_horizontal = 0
+pivot_offset = Vector2(163, 8)
+theme_override_styles/panel = ExtResource("3_50k4h")
+
+[node name="Mute_Toggle" type="TextureButton" parent="UI Elements/Panel/Volume"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = -2.0
+offset_right = 519.0
+offset_bottom = 510.0
+scale = Vector2(0.1, 0.1)
+toggle_mode = true
+texture_normal = ExtResource("6_7nsdy")
+texture_pressed = ExtResource("7_m8i6c")
+
+[node name="Volume_Slider" type="HSlider" parent="UI Elements/Panel/Volume"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -178.0
+offset_top = 14.0
+offset_right = -8.0
+offset_bottom = 36.0
+grow_horizontal = 0
+pivot_offset = Vector2(77, 20)
 max_value = 1.0
 step = 0.001
 value = 0.5
 
-[node name="Mute_Toggle" type="TextureButton" parent="UI Elements/Panel"]
-layout_mode = 0
-offset_left = 252.0
-offset_right = 764.0
-offset_bottom = 512.0
-scale = Vector2(0.1, 0.1)
-toggle_mode = true
-texture_normal = ExtResource("3_yq2td")
-texture_pressed = ExtResource("4_rkmc3")
+[node name="Pitch" type="Panel" parent="UI Elements/Panel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -257.0
+offset_top = 68.0
+offset_right = -12.0
+offset_bottom = 115.0
+grow_horizontal = 0
+pivot_offset = Vector2(124, 41)
+theme_override_styles/panel = ExtResource("3_50k4h")
 
-[node name="Pause_Toggle" type="TextureButton" parent="UI Elements/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-toggle_mode = true
-texture_normal = ExtResource("3_yq2td")
-texture_pressed = ExtResource("4_rkmc3")
+[node name="Volume_Slider" type="HSlider" parent="UI Elements/Panel/Pitch"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -178.0
+offset_top = 14.0
+offset_right = -8.0
+offset_bottom = 36.0
+grow_horizontal = 0
+pivot_offset = Vector2(77, 20)
+max_value = 1.0
+step = 0.001
+value = 0.5
 
-[node name="BPM Edit" type="LineEdit" parent="UI Elements/Panel"]
-layout_mode = 0
-offset_right = 67.0625
-offset_bottom = 31.0
-max_length = 3
-caret_blink = true
+[node name="Label" type="Label" parent="UI Elements/Panel/Pitch"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 13.0
+offset_top = -11.5
+offset_right = 57.0
+offset_bottom = 11.5
+grow_vertical = 2
+text = "Pitch:"
 
 [connection signal="timeout" from="Audio Controller/Timer" to="." method="_on_timer_timeout"]
-[connection signal="value_changed" from="UI Elements/Panel/Volume_Slider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="pressed" from="UI Elements/Panel/Mute_Toggle" to="." method="_on_mute_toggle_pressed"]
-[connection signal="pressed" from="UI Elements/Panel/Pause_Toggle" to="." method="_on_pause_toggle_pressed"]
-[connection signal="text_submitted" from="UI Elements/Panel/BPM Edit" to="." method="_on_bpm_edit_text_submitted"]
+[connection signal="text_submitted" from="UI Elements/Panel/BPM/BPM Edit" to="." method="_on_bpm_edit_text_submitted"]
+[connection signal="pressed" from="UI Elements/Panel/Pause_Play/Pause_Toggle" to="." method="_on_pause_toggle_pressed"]
+[connection signal="pressed" from="UI Elements/Panel/Volume/Mute_Toggle" to="." method="_on_mute_toggle_pressed"]
+[connection signal="value_changed" from="UI Elements/Panel/Volume/Volume_Slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="UI Elements/Panel/Pitch/Volume_Slider" to="." method="_on_volume_slider_value_changed"]

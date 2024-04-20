@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://fyo102umoyhj"]
+[gd_scene load_steps=4 format=3 uid="uid://fyo102umoyhj"]
 
 [ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_h3bwa"]
 [ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/Tid Bits/metronome.tscn" id="1_heyky"]
 [ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Tid Bits/Bus_Audio_Slider.tscn" id="2_rxtph"]
-[ext_resource type="Texture2D" uid="uid://dyuo4q6qh5lrl" path="res://Images/9027120_speaker_high_thin_icon.png" id="3_0vwki"]
-[ext_resource type="Texture2D" uid="uid://b3haecdb6gsmt" path="res://Images/9026993_speaker_slash_thin_icon.png" id="4_k7s04"]
 
 [node name="Metronome_Controller" type="Control"]
 layout_mode = 3
@@ -22,16 +20,6 @@ layout_mode = 0
 offset_right = 239.0
 value = 0.5
 
-[node name="Mute Button" type="TextureButton" parent="UI Elements"]
-layout_mode = 0
-offset_left = 308.0
-offset_right = 820.0
-offset_bottom = 512.0
-toggle_mode = true
-action_mode = 0
-texture_normal = ExtResource("3_0vwki")
-texture_pressed = ExtResource("4_k7s04")
-
 [node name="BPM Entry" type="LineEdit" parent="UI Elements"]
 layout_mode = 0
 offset_right = 67.0625
@@ -40,7 +28,6 @@ max_length = 3
 caret_blink = true
 
 [connection signal="value_changed" from="UI Elements/Volume Slider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="pressed" from="UI Elements/Mute Button" to="." method="_on_mute_button_pressed"]
 [connection signal="text_changed" from="UI Elements/BPM Entry" to="Metronome" method="_on_bpm_entry_text_changed"]
 [connection signal="text_submitted" from="UI Elements/BPM Entry" to="Metronome" method="_on_line_edit_text_submitted"]
 
