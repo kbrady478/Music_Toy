@@ -9,7 +9,7 @@ var pause_Toggle: bool
 
 @onready var effect_Timer = $"Audio Controller/Timer"
 @onready var sound_Effect = $"Audio Controller/Sound_Effect"
-@onready var bpm_Edit = $"UI Elements/Panel/BPM Edit"
+@onready var bpm_Edit = $"UI Elements/Panel/BPM/BPM Edit"
 
 
 func _ready():
@@ -17,8 +17,10 @@ func _ready():
 	current_Wait_Time = 0.5
 	new_Wait_Time = 0.1
 	mute_Toggle = false
-	pause_Toggle = false
-	effect_Player()
+	pause_Toggle = true
+	bpm_Edit.set_placeholder(str(bpm))
+	#effect_Timer.paused = true
+	#effect_Player()
 
 
 func bpm_Calculation():
@@ -36,7 +38,7 @@ func effect_Player():
 		if current_Wait_Time != new_Wait_Time:
 			bpm_Calculation()
 		
-		print_debug(current_Wait_Time)
+		#print_debug(current_Wait_Time)
 		
 		sound_Effect.play()
 		effect_Timer.set_wait_time(current_Wait_Time)
@@ -66,14 +68,16 @@ func _on_mute_toggle_pressed():
 
 
 func _on_pause_toggle_pressed():
+	print("pause toggled: ", pause_Toggle)
 	pause_Toggle = !pause_Toggle
 	
 	if pause_Toggle == true:
 		effect_Timer.paused = true
 	else:
-		effect_Player()
+		
 		effect_Timer.set_wait_time(current_Wait_Time)
 		effect_Timer.paused = false
+		effect_Player()
 
 
 func _on_bpm_edit_text_submitted(new_text):
@@ -84,3 +88,7 @@ func _on_bpm_edit_text_submitted(new_text):
 
 func _on_pitch_slider_value_changed(value):
 	sound_Effect.pitch_scale = value
+
+
+func _on_test_audio_button_pressed():
+	sound_Effect.play()

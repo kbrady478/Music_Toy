@@ -225,7 +225,7 @@ offset_bottom = 36.0
 grow_horizontal = 0
 pivot_offset = Vector2(77, 20)
 min_value = 0.1
-max_value = 4.0
+max_value = 3.0
 step = 0.01
 value = 1.0
 
@@ -243,6 +243,7 @@ text = "Pitch:"
 
 [connection signal="timeout" from="Audio Controller/Timer" to="." method="_on_timer_timeout"]
 [connection signal="text_submitted" from="UI Elements/Panel/BPM/BPM Edit" to="." method="_on_bpm_edit_text_submitted"]
+[connection signal="pressed" from="UI Elements/Panel/Test Audio/Test Audio Button" to="." method="_on_test_audio_button_pressed"]
 [connection signal="pressed" from="UI Elements/Panel/Pause_Play/Pause_Toggle" to="." method="_on_pause_toggle_pressed"]
 [connection signal="pressed" from="UI Elements/Panel/Volume/Mute_Toggle" to="." method="_on_mute_toggle_pressed"]
 [connection signal="value_changed" from="UI Elements/Panel/Volume/Volume_Slider" to="." method="_on_volume_slider_value_changed"]
