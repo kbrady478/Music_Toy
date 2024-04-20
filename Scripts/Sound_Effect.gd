@@ -80,3 +80,7 @@ func _on_bpm_edit_text_submitted(new_text):
 	bpm = float(new_text)
 	bpm_Edit.set_placeholder(str(bpm))
 	bpm_Calculation()
+
+
+func _on_pitch_slider_value_changed(value):
+	sound_Effect.pitch_scale = value
