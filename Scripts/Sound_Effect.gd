@@ -17,9 +17,9 @@ func _ready():
 	current_Wait_Time = 0.5
 	new_Wait_Time = 0.1
 	mute_Toggle = false
-	pause_Toggle = false
+	pause_Toggle = true
 	bpm_Edit.set_placeholder(str(bpm))
-	
+	volume_Level = .5
 	#effect_Player()
 
 
@@ -68,13 +68,14 @@ func _on_mute_toggle_pressed():
 
 
 func _on_pause_toggle_pressed():
-	print("pause toggled: ", pause_Toggle)
+	#print("pause toggled: ", pause_Toggle)
 	pause_Toggle = !pause_Toggle
 	
 	if pause_Toggle == true:
+		#print("muted")
 		effect_Timer.paused = true
 	else:
-		
+		#print("unmuted")
 		effect_Timer.set_wait_time(current_Wait_Time)
 		effect_Timer.paused = false
 		effect_Player()

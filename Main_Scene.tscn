@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://crhyao1wu6pgp"]
+[gd_scene load_steps=10 format=3 uid="uid://crhyao1wu6pgp"]
 
 [ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_s7m86"]
 [ext_resource type="StyleBox" uid="uid://dpxmf7lno6wkj" path="res://Styles/small_Panel.tres" id="2_ojy7r"]
@@ -21,40 +21,6 @@ corner_radius_bottom_left = 5
 font_size = 17
 shadow_size = 0
 
-[sub_resource type="GDScript" id="GDScript_wqgm4"]
-script/source = "extends Control
-
-@export var bus_Name: String
-
-var bus_Index: int
-var volume_Level : float # for use across functions
-var mute_Toggle: bool
-
-
-func _ready() -> void:
-	bus_Index = AudioServer.get_bus_index(bus_Name)
-	mute_Toggle = false
-	
-
-
-func _on_volume_slider_value_changed(value) -> void:
-	volume_Level = value
-	
-	if mute_Toggle == true:
-		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
-	else:
-		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
-
-
-func _on_mute_button_pressed():
-	mute_Toggle = not mute_Toggle
-	
-	if mute_Toggle == true:
-		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
-	else:
-		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
-"
-
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -63,13 +29,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="Panel" parent="."]
-layout_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Background" type="Panel" parent="CanvasLayer"]
 offset_right = 1152.0
 offset_bottom = 648.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_cvkrs")
 
-[node name="Top Layer" type="Panel" parent="Background"]
+[node name="Top Layer" type="Panel" parent="CanvasLayer/Background"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -81,7 +48,82 @@ offset_bottom = 111.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kt38v")
 
-[node name="Master Bus Volume" type="Control" parent="Background/Top Layer"]
+[node name="Metronome_Controller" parent="CanvasLayer/Background/Top Layer" instance=ExtResource("5_syk2d")]
+
+[node name="UI Elements" parent="CanvasLayer/Background/Top Layer/Metronome_Controller" index="1"]
+layout_mode = 1
+
+[node name="Panel" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements" index="0"]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 570.0
+offset_bottom = 70.0
+
+[node name="Label" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="0"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_right = 96.0
+offset_bottom = 11.5
+grow_vertical = 2
+
+[node name="BPM Entry" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="1"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -388.0
+offset_top = -13.0
+offset_right = -320.938
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="BPM Label" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="2"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 108.0
+offset_top = -10.0
+offset_right = 148.0
+offset_bottom = 13.0
+grow_vertical = 2
+
+[node name="Volume Slider" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="3"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -309.0
+offset_top = -4.0
+offset_right = -70.0
+offset_bottom = 12.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Toggle Mute" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="4"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -23.0
+offset_right = 456.0
+offset_bottom = 489.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Master Bus Volume" type="Control" parent="CanvasLayer/Background/Top Layer"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -91,7 +133,7 @@ grow_horizontal = 0
 script = ExtResource("1_s7m86")
 bus_Name = "Master"
 
-[node name="Panel" type="Panel" parent="Background/Top Layer/Master Bus Volume"]
+[node name="Panel" type="Panel" parent="CanvasLayer/Background/Top Layer/Master Bus Volume"]
 layout_mode = 0
 offset_left = -418.0
 offset_top = 12.0
@@ -99,7 +141,7 @@ offset_right = -24.0
 offset_bottom = 71.0
 theme_override_styles/panel = ExtResource("2_ojy7r")
 
-[node name="Volume Slider" parent="Background/Top Layer/Master Bus Volume/Panel" instance=ExtResource("3_ilf2x")]
+[node name="Volume Slider" parent="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel" instance=ExtResource("3_ilf2x")]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -111,7 +153,7 @@ offset_bottom = 8.5
 grow_vertical = 2
 value = 0.5
 
-[node name="Mute Button" type="TextureButton" parent="Background/Top Layer/Master Bus Volume/Panel"]
+[node name="Mute Button" type="TextureButton" parent="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -129,7 +171,7 @@ toggle_mode = true
 texture_normal = ExtResource("4_g4s6c")
 texture_pressed = ExtResource("5_5sjee")
 
-[node name="Label" type="Label" parent="Background/Top Layer/Master Bus Volume/Panel"]
+[node name="Label" type="Label" parent="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 16.0
@@ -138,89 +180,8 @@ offset_bottom = 40.0
 text = "Master Volume:"
 label_settings = SubResource("LabelSettings_yq7lh")
 
-[node name="Metronome_Controller" parent="Background/Top Layer" instance=ExtResource("5_syk2d")]
-layout_mode = 1
-offset_left = -1.0
-offset_right = -1.0
-script = SubResource("GDScript_wqgm4")
+[connection signal="value_changed" from="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel/Volume Slider" to="CanvasLayer/Background/Top Layer/Master Bus Volume" method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel/Mute Button" to="CanvasLayer/Background/Top Layer/Master Bus Volume" method="_on_mute_button_pressed"]
 
-[node name="Panel" parent="Background/Top Layer/Metronome_Controller/UI Elements" index="0"]
-offset_left = 24.0
-offset_top = 12.0
-offset_right = 528.0
-offset_bottom = 71.0
-
-[node name="Label" parent="Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="0"]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 12.0
-offset_top = -11.5
-offset_right = 52.0
-offset_bottom = 11.5
-grow_vertical = 2
-text = "Metronome:"
-
-[node name="BPM Entry" parent="Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="1"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -79.5
-offset_top = -13.5
-offset_right = -12.4375
-offset_bottom = 17.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="BPM Label" parent="Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="2"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.5
-offset_top = -10.5
-offset_right = -83.5
-offset_bottom = 12.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "BPM:"
-
-[node name="Volume Slider" parent="Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="3"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -243.0
-offset_top = -7.5
-offset_right = -64.0
-offset_bottom = 8.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="Toggle Mute" parent="Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="4"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -25.5
-offset_right = 452.0
-offset_bottom = 486.5
-grow_horizontal = 0
-grow_vertical = 2
-
-[connection signal="value_changed" from="Background/Top Layer/Master Bus Volume/Panel/Volume Slider" to="Background/Top Layer/Master Bus Volume" method="_on_volume_slider_value_changed"]
-[connection signal="pressed" from="Background/Top Layer/Master Bus Volume/Panel/Mute Button" to="Background/Top Layer/Master Bus Volume" method="_on_mute_button_pressed"]
-
-[editable path="Background/Top Layer/Metronome_Controller"]
-[editable path="Background/Top Layer/Metronome_Controller/Metronome"]
+[editable path="CanvasLayer/Background/Top Layer/Metronome_Controller"]
+[editable path="CanvasLayer/Background/Top Layer/Metronome_Controller/Metronome"]

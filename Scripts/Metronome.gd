@@ -56,14 +56,7 @@ func _on_metronome_timer_timeout():
 	metronome()
 
 
-func _on_line_edit_text_submitted(new_text):
+func _on_bpm_entry_text_submitted(new_text):
 	bpm = float(new_text)
 	bpm_Entry.set_placeholder(str(bpm))
 	bpm_Calculation()
-
-
-
-
-
-#func _on_bpm_entry_text_changed(new_text):
-

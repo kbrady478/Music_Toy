@@ -10,6 +10,7 @@ var mute_Toggle: bool
 func _ready() -> void:
 	bus_Index = AudioServer.get_bus_index(bus_Name)
 	mute_Toggle = false
+	volume_Level = .5
 	
 
 
