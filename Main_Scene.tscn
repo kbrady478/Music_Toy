@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://crhyao1wu6pgp"]
+[gd_scene load_steps=12 format=3 uid="uid://crhyao1wu6pgp"]
 
 [ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_s7m86"]
 [ext_resource type="StyleBox" uid="uid://dpxmf7lno6wkj" path="res://Styles/small_Panel.tres" id="2_ojy7r"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dxec5f7v6ula6" path="res://Images/speaker_On.png" id="4_g4s6c"]
 [ext_resource type="Texture2D" uid="uid://b1ah5tfl1uv41" path="res://Images/speaker_Muted.png" id="5_5sjee"]
 [ext_resource type="PackedScene" uid="uid://fyo102umoyhj" path="res://Prefabs/Key Components/Metronome_Controller.tscn" id="5_syk2d"]
+[ext_resource type="PackedScene" uid="uid://u5od8msmyrxg" path="res://Prefabs/Key Components/Sound_Effect_Controller.tscn" id="7_6hxk4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cvkrs"]
 bg_color = Color(0.113725, 0.133333, 0.160784, 1)
@@ -21,8 +22,9 @@ corner_radius_bottom_left = 5
 font_size = 17
 shadow_size = 0
 
-[node name="Main" type="Control"]
-layout_mode = 3
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xo0sd"]
+
+[node name="PanelContainer" type="PanelContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -65,9 +67,10 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 96.0
-offset_bottom = 11.5
+offset_left = 9.0
+offset_top = -10.0
+offset_right = 105.0
+offset_bottom = 13.0
 grow_vertical = 2
 
 [node name="BPM Entry" parent="CanvasLayer/Background/Top Layer/Metronome_Controller/UI Elements/Panel" index="1"]
@@ -179,6 +182,117 @@ offset_right = 143.0
 offset_bottom = 40.0
 text = "Master Volume:"
 label_settings = SubResource("LabelSettings_yq7lh")
+
+[node name="Selection Layer" type="Panel" parent="CanvasLayer/Background"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 124.0
+offset_right = 1081.0
+offset_bottom = 635.0
+theme_override_styles/panel = ExtResource("2_ojy7r")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Background/Selection Layer"]
+layout_mode = 1
+offset_top = -10.0
+offset_bottom = -10.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xo0sd")
+
+[node name="(Sound Effect) Controller" parent="CanvasLayer/Background/Selection Layer/Panel" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 27.0
+offset_bottom = 21.0
+
+[node name="(Sound Effect) Controller2" parent="CanvasLayer/Background/Selection Layer/Panel" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 528.0
+offset_top = 21.0
+offset_right = 528.0
+offset_bottom = 21.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Panel2" type="Panel" parent="CanvasLayer/Background/Selection Layer"]
+layout_mode = 1
+offset_top = 115.0
+offset_bottom = 115.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xo0sd")
+
+[node name="(Sound Effect) Controller" parent="CanvasLayer/Background/Selection Layer/Panel2" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 27.0
+offset_bottom = 21.0
+
+[node name="(Sound Effect) Controller2" parent="CanvasLayer/Background/Selection Layer/Panel2" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 528.0
+offset_top = 21.0
+offset_right = 528.0
+offset_bottom = 21.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Panel3" type="Panel" parent="CanvasLayer/Background/Selection Layer"]
+layout_mode = 1
+offset_top = 242.0
+offset_bottom = 242.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xo0sd")
+
+[node name="(Sound Effect) Controller" parent="CanvasLayer/Background/Selection Layer/Panel3" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 27.0
+offset_bottom = 21.0
+
+[node name="(Sound Effect) Controller2" parent="CanvasLayer/Background/Selection Layer/Panel3" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 528.0
+offset_top = 21.0
+offset_right = 528.0
+offset_bottom = 21.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Panel4" type="Panel" parent="CanvasLayer/Background/Selection Layer"]
+layout_mode = 1
+offset_top = 366.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xo0sd")
+
+[node name="(Sound Effect) Controller" parent="CanvasLayer/Background/Selection Layer/Panel4" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 21.0
+offset_right = 27.0
+offset_bottom = 21.0
+
+[node name="(Sound Effect) Controller2" parent="CanvasLayer/Background/Selection Layer/Panel4" instance=ExtResource("7_6hxk4")]
+layout_mode = 1
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 528.0
+offset_top = 21.0
+offset_right = 528.0
+offset_bottom = 21.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Main" type="Control" parent="."]
+layout_mode = 2
 
 [connection signal="value_changed" from="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel/Volume Slider" to="CanvasLayer/Background/Top Layer/Master Bus Volume" method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="CanvasLayer/Background/Top Layer/Master Bus Volume/Panel/Mute Button" to="CanvasLayer/Background/Top Layer/Master Bus Volume" method="_on_mute_button_pressed"]
