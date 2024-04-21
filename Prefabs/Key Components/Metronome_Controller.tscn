@@ -1,13 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://fyo102umoyhj"]
+[gd_scene load_steps=7 format=3 uid="uid://fyo102umoyhj"]
 
-[ext_resource type="Script" path="res://Scripts/Bus_Volume.gd" id="1_h3bwa"]
 [ext_resource type="PackedScene" uid="uid://5pekpbs0nxeo" path="res://Prefabs/Tid Bits/metronome.tscn" id="1_heyky"]
 [ext_resource type="PackedScene" uid="uid://cqo701k5hpdlt" path="res://Prefabs/Tid Bits/Bus_Audio_Slider.tscn" id="2_rxtph"]
+[ext_resource type="StyleBox" uid="uid://dpxmf7lno6wkj" path="res://Styles/small_Panel.tres" id="3_m6pqg"]
+[ext_resource type="Texture2D" uid="uid://dxec5f7v6ula6" path="res://Images/speaker_On.png" id="4_wh344"]
+[ext_resource type="Texture2D" uid="uid://b1ah5tfl1uv41" path="res://Images/speaker_Muted.png" id="5_7uxbx"]
+
+[sub_resource type="GDScript" id="GDScript_gk5e6"]
+script/source = "extends Control
+
+@export var bus_Name: String
+
+@onready var slider_Node = $\"UI Elements/Panel/Volume Slider\"
+
+var bus_Index: int
+var volume_Level : float # for use across functions
+var mute_Toggle: bool
+
+
+func _ready() -> void:
+	bus_Index = AudioServer.get_bus_index(bus_Name)
+	mute_Toggle = false
+	volume_Level = slider_Node.value
+
+
+func _on_volume_slider_value_changed(value) -> void:
+	volume_Level = value
+	
+	if mute_Toggle == true:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
+	else:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
+
+
+func _on_toggle_mute_pressed():
+	mute_Toggle = not mute_Toggle
+
+	if mute_Toggle == true:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(0))
+	else:
+		AudioServer.set_bus_volume_db(bus_Index, linear_to_db(volume_Level))
+"
 
 [node name="Metronome_Controller" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-script = ExtResource("1_h3bwa")
+script = SubResource("GDScript_gk5e6")
 bus_Name = "Metronome"
 
 [node name="Metronome" parent="." instance=ExtResource("1_heyky")]
@@ -15,20 +53,45 @@ bus_Name = "Metronome"
 [node name="UI Elements" type="Control" parent="."]
 anchors_preset = 0
 
-[node name="Volume Slider" parent="UI Elements" instance=ExtResource("2_rxtph")]
+[node name="Panel" type="Panel" parent="UI Elements"]
 layout_mode = 0
-offset_right = 239.0
-value = 0.5
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("3_m6pqg")
 
-[node name="BPM Entry" type="LineEdit" parent="UI Elements"]
+[node name="Label" type="Label" parent="UI Elements/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="BPM Entry" type="LineEdit" parent="UI Elements/Panel"]
 layout_mode = 0
 offset_right = 67.0625
 offset_bottom = 31.0
 max_length = 3
 caret_blink = true
 
-[connection signal="value_changed" from="UI Elements/Volume Slider" to="." method="_on_volume_slider_value_changed"]
-[connection signal="text_changed" from="UI Elements/BPM Entry" to="Metronome" method="_on_bpm_entry_text_changed"]
-[connection signal="text_submitted" from="UI Elements/BPM Entry" to="Metronome" method="_on_line_edit_text_submitted"]
+[node name="BPM Label" type="Label" parent="UI Elements/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Volume Slider" parent="UI Elements/Panel" instance=ExtResource("2_rxtph")]
+layout_mode = 0
+offset_right = 239.0
+value = 0.5
+
+[node name="Toggle Mute" type="TextureButton" parent="UI Elements/Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.1, 0.1)
+toggle_mode = true
+texture_normal = ExtResource("4_wh344")
+texture_pressed = ExtResource("5_7uxbx")
+
+[connection signal="text_submitted" from="UI Elements/Panel/BPM Entry" to="Metronome" method="_on_line_edit_text_submitted"]
+[connection signal="value_changed" from="UI Elements/Panel/Volume Slider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="UI Elements/Panel/Toggle Mute" to="." method="_on_toggle_mute_pressed"]
 
 [editable path="Metronome"]

@@ -10,7 +10,7 @@ var accent_Tracker
 @onready var metronome_Timer = $Metronome_Timer
 @onready var metronome_Sound = $Metronome_Sound
 @onready var metronome_Accented = $Metronome_Accented
-@onready var bpm_Entry = $"../UI Elements/BPM Entry"
+@onready var bpm_Entry = $"../UI Elements/Panel/BPM Entry"
 
 func _ready():
 	bpm = 180.0

@@ -17,9 +17,9 @@ func _ready():
 	current_Wait_Time = 0.5
 	new_Wait_Time = 0.1
 	mute_Toggle = false
-	pause_Toggle = true
+	pause_Toggle = false
 	bpm_Edit.set_placeholder(str(bpm))
-	#effect_Timer.paused = true
+	
 	#effect_Player()
 
 
