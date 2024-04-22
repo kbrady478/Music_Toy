@@ -74,6 +74,7 @@ func _on_pause_toggle_pressed():
 	
 	if pause_Toggle == true:
 		#print("muted")
+		sound_Effect.stop()
 		effect_Timer.paused = true
 	else:
 		#print("unmuted")
