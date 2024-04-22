@@ -1,9 +1,10 @@
 extends Control
 
 var bpm: float
+# Wait time for looping timers
 var current_Wait_Time: float
 var new_Wait_Time: float
-var volume_Level: float
+var volume_Level: float # To keep volume synced across functions
 var mute_Toggle: bool
 var pause_Toggle: bool
 

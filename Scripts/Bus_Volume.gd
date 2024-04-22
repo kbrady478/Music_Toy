@@ -11,7 +11,6 @@ func _ready() -> void:
 	bus_Index = AudioServer.get_bus_index(bus_Name)
 	mute_Toggle = false
 	volume_Level = .5
-	
 
 
 func _on_volume_slider_value_changed(value) -> void:

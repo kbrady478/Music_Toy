@@ -1,12 +1,20 @@
 # **Credits for this project**
 Links to code based tutorials can be found within their respective scripts 
 
-## Inspiration
 
 ## Audio sources
 [Metronome](https://freesound.org/people/xtrgamr/sounds/441644/)
 
-[Hihat 1](https://freesound.org/people/Sascha%20Burghard/sounds/44942/)
+[Drum Hihat](https://freesound.org/people/Sascha%20Burghard/sounds/44942/)
+[Drum Kick](https://freesound.org/people/sandyrb/sounds/41148/)
+[Drum Snare](https://freesound.org/people/Theriavirra/sounds/270053/)
+
+[Synth Snare](https://freesound.org/people/THE_bizniss/sounds/39582/)
+[Synth Bass](https://freesound.org/people/zgump/sounds/73003/)
+[Synth Drone](https://freesound.org/people/Fansofcollision/sounds/20202/)
+
+[Zappy Synth](https://freesound.org/people/T_roy_920/sounds/371052/)
+[Wavy Synth](https://freesound.org/people/nomiqbomi/sounds/579509/)
 
 
 ## Images
