@@ -1,5 +1,6 @@
 # Y1 Programming Music Toy Assignment
-Name: Kurtis Brady Student Number: C23789389
+Name: Kurtis Brady 
+Student Number: C23789389
 
 ## Credits can be found in the [Credits.md file](https://github.com/kbrady478/Music_Toy/blob/main/Other/Credits.md)
 
